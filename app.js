@@ -67,10 +67,6 @@ const sessionOptions = {
     }
 };
 
-app.get("/", (req,res) => {
-    res.redirect("/listings");
-});
-
 
 app.use(session(sessionOptions));
 app.use(flash());
@@ -87,6 +83,10 @@ app.use((req, res, next) => {
     res.locals.error = req.flash("error");
     res.locals.curruser = req.user;
     next();
+});
+
+app.get("/", (req,res) => {
+    res.redirect("/listings");
 });
 
 app.use("/listings", listingRouter);
